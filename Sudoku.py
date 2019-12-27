@@ -7,6 +7,10 @@ import random
 ROWS = 9
 COLS = 9
 BOARD = [[0 for i in range(ROWS)] for j in range(COLS)]
+EASY_MODE = 38
+INTERMEDIATE_MODE = 30
+HARD_MODE = 24
+EXPERT_MODE = 17
 
 def print_board():
     print()
@@ -50,18 +54,24 @@ def check_all(num, row, col):
     return False
 
 
+def create_sudoku(mode):
+    if mode == 0:
+        unused_num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        for i in range(9):
+            test_num = random.choice(unused_num)
+            unused_num.remove(test_num)
+            BOARD[0][i] = test_num
+
+        for x in range(1, 9):
+            shift = 3
+            if x == 3 or x == 6:
+                shift = 1
+            for y in range(COLS):
+                BOARD[x][y-shift] = BOARD[x-1][y]
+
+
 def main():
-    BOARD[1][5] = 5
-    BOARD[3][5] = 5
-    BOARD[0][2] = 3
-    BOARD[0][7] = 5
-    BOARD[2][0] = 3
-    if check_all(3, 0, 2):
-        print("FAILURE")
-    if check_all(5, 0, 7):
-        print("SUCCESS")
-    if check_all(5, 1, 5):
-        print("FAILURE")
+    create_sudoku(0)
     print_board()
 
 
