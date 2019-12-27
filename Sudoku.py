@@ -44,16 +44,24 @@ def check_square(num, row, col):
     return True
 
 
+def check_all(num, row, col):
+    if check_col(num, row, col) and check_col(num, row, col) and check_square(num, row, col):
+        return True
+    return False
+
+
 def main():
     BOARD[1][5] = 5
     BOARD[3][5] = 5
     BOARD[0][2] = 3
     BOARD[0][7] = 5
     BOARD[2][0] = 3
-    if check_square(3, 0, 2):
+    if check_all(3, 0, 2):
         print("FAILURE")
-    if check_square(5, 0, 7):
+    if check_all(5, 0, 7):
         print("SUCCESS")
+    if check_all(5, 1, 5):
+        print("FAILURE")
     print_board()
 
 
