@@ -70,12 +70,24 @@ def create_sudoku(mode):
             BOARD[x][y-shift] = BOARD[x-1][y]
 
     while count != 0:
-        row = random.randint(0, 8)
-        col = random.randint(0, 8)
+        row = random.randint(ROWS)
+        col = random.randint(COLS)
         if BOARD[row][col] == '.':
             continue
         BOARD[row][col] = '.'
         count -= 1
+
+
+def find_empty():
+    for x in range(ROWS):
+        for y in range(COLS):
+            if BOARD[x][y] == '.':
+                return True
+    return False
+
+
+
+
 
 def main():
     create_sudoku(EASY_MODE)
