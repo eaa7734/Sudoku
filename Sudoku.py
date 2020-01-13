@@ -55,23 +55,30 @@ def check_all(num, row, col):
 
 
 def create_sudoku(mode):
-    if mode == 0:
-        unused_num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        for i in range(9):
-            test_num = random.choice(unused_num)
-            unused_num.remove(test_num)
-            BOARD[0][i] = test_num
+    count = 81 - mode
+    unused_num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for i in range(9):
+        test_num = random.choice(unused_num)
+        unused_num.remove(test_num)
+        BOARD[0][i] = test_num
 
-        for x in range(1, 9):
-            shift = 3
-            if x == 3 or x == 6:
-                shift = 1
-            for y in range(COLS):
-                BOARD[x][y-shift] = BOARD[x-1][y]
+    for x in range(1, 9):
+        shift = 3
+        if x == 3 or x == 6:
+            shift = 1
+        for y in range(COLS):
+            BOARD[x][y-shift] = BOARD[x-1][y]
 
+    while count != 0:
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        if BOARD[row][col] == '.':
+            continue
+        BOARD[row][col] = '.'
+        count -= 1
 
 def main():
-    create_sudoku(0)
+    create_sudoku(EASY_MODE)
     print_board()
 
 
