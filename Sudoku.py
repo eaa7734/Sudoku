@@ -14,6 +14,10 @@ EMPTY = [0] * 2
 
 
 def print_board(board):
+    """
+    Function to print out the board in text in a viewable
+    manner.
+    """
     print()
     for x in range(ROWS):
         print("\t", end='')
@@ -23,6 +27,10 @@ def print_board(board):
 
 
 def check_row(board, num, row, col):
+    """
+    Checks to see if a an entire row has a repeat
+    of the number given based on the board that was passed.
+    """
     for y in range(COLS):
         if y != col:
             if board[row][y] == num:
@@ -31,6 +39,10 @@ def check_row(board, num, row, col):
 
 
 def check_col(board, num, row, col):
+    """
+    Checks to see if a an entire column has a repeat
+    of the number given based on the board that was passed.
+    """
     for x in range(ROWS):
         if x != row:
             if board[x][col] == num:
@@ -39,6 +51,10 @@ def check_col(board, num, row, col):
 
 
 def check_square(board, num, row, col):
+    """
+    Checks to see if a block has a repeat
+    of the number given based on the board that was passed.
+    """
     start_x = row - (row % 3)
     start_y = col - (col % 3)
     for x in range(start_x,start_x+3):
@@ -50,12 +66,21 @@ def check_square(board, num, row, col):
 
 
 def check_all(board, num, row, col):
-    if check_row(board, num, row, col) and check_col(board, num, row, col) and check_square(board, num, row, col):
+    """
+    Checks to see if a number can be placed
+    on the board that was passed.
+    """
+    if check_row(board, num, row, col) and check_col(board, num, row, col)\
+            and check_square(board, num, row, col) and board[row][col] == '.':
         return True
     return False
 
 
 def create_sudoku(board, mode):
+    """
+    Creates a sudoku board based on the
+    difficulty
+    """
     count = 81 - mode
     while count != 0:
         row = random.randint(0, 8)
@@ -67,6 +92,9 @@ def create_sudoku(board, mode):
 
 
 def find_empty(board):
+    """
+    Finds an empty spot in the given board
+    """
     for x in range(ROWS):
         for y in range(COLS):
             if board[x][y] == '.':
@@ -77,6 +105,10 @@ def find_empty(board):
 
 
 def solve_sudoku(board):
+    """
+    Backtracking algorithm to solve a sudoku
+    board
+    """
     if not find_empty(board):
         return True
 
